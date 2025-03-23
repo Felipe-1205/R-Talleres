@@ -1,0 +1,46 @@
+---
+title: "tarea 5"
+author: "Andres Felipe Marroquin Martin"
+date: '`r Sys.Date()`'
+output: word_document
+---
+# Tarea 5
+
+## Punto 1.
+
+### a)Probabilidad de no emitir partículas en dos horas y media
+
+```{r}
+lambda <- 2.5 / 5
+k <- 0
+prob_no_emitir <- dpois(k, lambda)
+prob_no_emitir
+```
+
+### b)Probabilidad de emitir al menos una partícula
+
+```{r}
+prob_emitir_al_menos_una <- 1 - dpois(0, lambda)
+prob_emitir_al_menos_una
+```
+
+## Punto 2.
+
+### a)Probabilidad de que la sexta persona que escuche el rumor sea la cuarta en creerlo
+
+```{r}
+n <- 6
+k <- 4
+p <- 0.8
+prob_sexta_cuarta <- dbinom(k, n, p)
+prob_sexta_cuarta
+```
+
+### b)Probabilidad de que la tercera persona sea la primera en creerlo
+
+```{r}
+n <- 3
+k <- 1
+prob_tercera_primera <- dbinom(k, n, p)
+prob_tercera_primera
+```

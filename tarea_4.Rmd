@@ -1,0 +1,73 @@
+---
+title: "Tarea 4"
+author: "Andres Felipe Marroquin Martin"
+date: "`r Sys.Date()`"
+output: word_document
+---
+# Tarea 2
+
+## Punto 1.
+
+### a)¿Cuál es la probabilidad de que al menos 3 de las siguientes 5 personas seleccionadas al azar tengan esta opinión?
+
+```{r}
+numero <- 5
+probabilidad <- 0.7
+1 - pbinom(2, size = numero, prob = probabilidad)
+```
+
+### b)¿Cuál es la probabilidad de que exactamente 4 de las 5 personas seleccionadas al azar tengan esta opinión?
+
+```{r}
+dbinom(4, size = numero, prob = probabilidad)
+```
+
+### c)Hallar la media y la varianza.
+
+```{r}
+media <- numero * probabilidad
+varianza <- numero * probabilidad * (1 - probabilidad)
+media
+varianza
+```
+
+### d)Trace una gráfica de la distribución de probabilidad.
+
+```{r}
+x <- 0:numero
+prob_dist <- dbinom(x, size = numero, prob = probabilidad)
+barplot(prob_dist, names.arg = x, xlab = "Número de éxitos", ylab = "Probabilidad", main = "Distribución binomial (numero=5, probabilidad=0.7)")
+
+```
+
+## Punto 2.
+
+### a)¿Cuál es la probabilidad de que exactamente 3 de los 8 consumidores entrevistados hayan comenzado a consumir Valium por problemas psicológicos?
+
+```{r}
+numero2 <- 8
+probabilidad2 <- 0.6
+dbinom(3, size = numero2, prob = probabilidad2)
+```
+
+### b)¿Cuál es la probabilidad de que al menos 5 personas hayan comenzado a consumir Valium por problemas que no fueron psicológicos?
+
+```{r}
+1 - pbinom(4, size = numero2, prob = 1 - probabilidad2)
+```
+
+### c)Determine el número esperado de personas que consumen Valium por problemas psicológicos.
+
+```{r}
+floor(numero2 * probabilidad2)
+```
+
+## Punto 3.
+
+### a)la probabilidad de que exactamente 5 de los próximos 7 pacientes sobrevivan.
+
+```{r}
+numero3 <- 7
+probabilidad3 <- 0.9
+dbinom(5, size = numero3, prob = probabilidad3)
+```

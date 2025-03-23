@@ -1,0 +1,117 @@
+---
+title: "Informe 1"
+author: "Andres Felipe Marroquin Martin"
+date: "`r Sys.Date()`"
+output: word_document
+---
+# Tarea 1
+
+## Punto 1.
+
+```{r}
+mediciones <- c(3.1, 4.9, 2.8, 3.6, 2.5, 4.5, 3.5, 3.7, 4.1, 4.9, 
+                2.9, 2.1, 3.5, 4.0, 3.7, 2.7, 4.0, 4.4, 3.7, 4.2,
+                3.8, 6.2, 2.5, 2.9, 2.8, 5.1, 1.8, 5.6, 2.2, 3.4,
+                2.5, 3.6, 5.1, 4.8, 1.6, 3.6, 6.1, 4.7, 3.9, 3.9,
+                4.3, 5.7, 3.7, 4.6, 4.0, 5.6, 4.9, 4.2, 3.1, 3.9)
+mediciones
+```
+
+```{r}
+stem(mediciones)
+```
+
+(a) Resultados:
+
+La distribución de los datos tiene un solo pico principal alrededor del rango de 3.5 a 3.9. La mayoría de las mediciones se encuentran entre 2.5 y 4.9, lo que muestra que muchos valores están agrupados en ese intervalo. Hay una ligera inclinación hacia la derecha debido a algunos valores más altos en los rangos de 5 y 6. En resumen, la mayoría de los valores están agrupados en el centro, pero hay algunos valores extremos que se deben tener en cuenta.
+
+Resultados atípicos:
+
+Los valores 6.1 y 6.2 podrían considerarse atípicos ya que están significativamente alejados del grueso de los datos, La mayor parte de los datos se encuentra entre 2.5 y 4.9, por lo que cualquier valor fuera de este rango podría ser considerado atípico en un análisis más detallado.
+
+(b) Valor menor Segun la tabla el valor menor seria 1.6
+
+## Punto 2
+
+```{r}
+mediciones2 <- c(61, 93, 91, 86, 55, 63, 86, 82, 76, 57,
+                       94, 89, 67, 62, 72, 87, 68, 65, 75, 84)
+mediciones2
+```
+```{r}
+stripchart(mediciones2,method = "stack",pch = 19,col = "blue", offset = 1/2)
+```
+
+La distribución de las calificaciones está bastante dispersa, cubriendo un rango de 55 a 94. No hay un pico claro, pero se nota una ligera concentración entre 60-70 y 80-90. Los valores más bajos son 55 y 57, mientras que los más altos son 93 y 94. En general, las calificaciones están distribuidas de forma relativamente uniforme, sin una agrupación fuerte en torno a un valor específico.
+
+## Punto 3
+
+```{r}
+library(readxl)
+Demográficas <- read_excel("C:/Users/andre/Desktop/U/estadistica descriptiva/tarea 1/Demográficas.xlsx")
+attach(Demográficas)
+```
+
+### ¿En dónde vive ahora la mayoría de los adultos?
+**Tabla de frecuencias**
+ 
+```{r}
+tabla1<-data.frame(table(`viven ahora`))
+tabla1
+tabla2<-transform(tabla1,FA=cumsum(Freq),FR=round(prop.table(Freq),2),FRA=round(cumsum(prop.table(Freq)),2))
+tabla2
+```
+
+**Diagrama de barras**
+
+```{r}
+porcentaje1<-round(prop.table(table(`viven ahora`))*100,2)
+porcentaje1
+lab1<-paste(porcentaje1,"%")
+lab1
+diag1<-barplot(table(`viven ahora`),axes = F,col = rainbow(4))
+text(diag1,c(2,2),labels=lab1)
+```
+
+**Diagrama Circular**
+
+```{r}
+lab2<-c("C","R","S","T")
+lab3<-paste(lab2,porcentaje1,"%")
+lab3
+pie(table(`viven ahora`),col = rainbow(4),labels = lab3)
+```
+
+La mayria de adultos vive en Ciudad
+
+### ¿Cuál considera la mayoría de los adultos que es la comunidad ideal?
+**Tabla de frecuencias**
+
+```{r}
+tabla3<-data.frame(table(ideal))
+tabla3
+tabla4<-transform(tabla3,FA=cumsum(Freq),FR=round(prop.table(Freq),2),FRA=round(cumsum(prop.table(Freq)),2))
+tabla4
+```
+
+**Diagrama de barras**
+
+```{r}
+porcentaje2<-round(prop.table(table(ideal))*100,2)
+porcentaje2
+lab4<-paste(porcentaje2,"%")
+lab4
+diag2<-barplot(table(ideal),axes = F,col = rainbow(4))
+text(diag2,c(2,2),labels=lab4)
+```
+
+**Diagrama Circular**
+
+```{r}
+lab5<-c("C","R","S","T")
+lab6<-paste(lab5,porcentaje2,"%")
+lab6
+pie(table(ideal),col = rainbow(4),labels = lab6)
+```
+
+La mayoria de adultos quiere vivir en una Ciudad Pequeña

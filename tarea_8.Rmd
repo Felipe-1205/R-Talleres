@@ -1,0 +1,46 @@
+---
+title: "tarea 8"
+author: "Andres Felipe Marroquin Martin"
+date: "`r Sys.Date()`"
+output: word_document
+---
+# Tarea 8
+
+## Punto 1.
+
+### a)Formular las hipótesis
+
+Hipótesis nula: La tasa de mortalidad de los pacientes con cáncer de pulmón en tres años sigue siendo del 90% (p = 0.90).
+
+Hipótesis alternativa: La tasa de mortalidad ha disminuido debido a los nuevos tratamientos (p < 0.90).
+
+### b)Cálculo
+
+```{r}
+n_total <- 150
+n_muertos <- 128
+p_esperado <- 0.90 
+
+prop.test(n_muertos, n_total, p = p_esperado, alternative = "less", conf.level = 0.95)
+```
+
+El valor p obtenido (0.0384) es menor que 0.05, lo que nos permite rechazar la hipótesis nula. Esto indica que la tasa de mortalidad con los nuevos tratamientos es significativamente menor al 90%, sugiriendo su efectividad.
+
+## Punto 2.
+
+### a)Formular las hipótesis
+
+Hipótesis nula: La distancia media de localización por eco de los murciélagos es de 6 metros (μ = 6).
+
+Hipótesis alternativa: La distancia media de localización por eco es mayor que 6 metros (μ > 6).
+
+### b)Cálculo
+
+```{r}
+distancias <- c(6.2, 5.9, 6.8, 6.3, 6.1, 6.4, 5.7, 6.0, 6.3, 6.2, 5.8, 5.9, 6.3, 6.1, 6.3, 6.1)
+media_esperada <- 6  
+
+t.test(distancias, mu = media_esperada, alternative = "greater", conf.level = 0.95)
+```
+
+Con un valor p de 0.01968, rechazamos la hipótesis nula, concluyendo que la distancia media de localización de los murciélagos es mayor a 6 metros, lo que respalda la hipótesis planteada.

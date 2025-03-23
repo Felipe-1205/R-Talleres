@@ -1,0 +1,101 @@
+---
+title: "taller3"
+author: "Andres Felipe Marroquin Martin"
+date: "`r Sys.Date()`"
+output: word_document
+---
+
+# Tarea 3
+
+```{r}
+library(modeest)
+```
+
+## Punto 1.
+
+### a)resumen
+
+```{r}
+ventas <- c(8408, 1374, 1872, 8879, 2459, 11413, 608, 14138, 6452, 1850, 
+            2818, 1356, 10498, 7478, 4019, 4341, 739, 2127, 3653, 5794, 8305)
+summary(ventas)
+```
+
+### b) limites inferior y superior.
+
+```{r}
+limite_inferior <- quantile(ventas, 0.25) - (1.5 * IQR(ventas))
+limite_superior <- quantile(ventas, 0.75) + (1.5 * IQR(ventas))
+limite_inferior
+limite_superior
+```
+
+### c) observaciones atipicas
+
+```{r}
+outliers <- ventas[ventas < limite_inferior | ventas > limite_superior]
+outliers
+```
+no hay observaciones atipicas
+
+### d)
+
+```{r}
+ventas_modificadas <- ventas
+ventas_modificadas[which(ventas_modificadas == 14138)] <- 41138
+
+limite_inferior_mod <- quantile(ventas_modificadas, 0.25) - (1.5 * IQR(ventas_modificadas))
+limite_superior_mod <- quantile(ventas_modificadas, 0.75) + (1.5 * IQR(ventas_modificadas))
+limite_inferior_mod
+limite_superior_mod
+outliers_mod <- ventas_modificadas[ventas_modificadas < limite_inferior_mod | ventas_modificadas > limite_superior_mod]
+outliers_mod
+```
+
+### e) Graficar el diagrama de cajas y explicarlo.
+
+```{r}
+boxplot(list(Ventas = ventas, Ventas_Modificadas = ventas_modificadas),col = rainbow(2),names = c("Original","Cambio"),horizontal = TRUE,main = "Comparación de Ventas Anuales",xlab = "Ventas (en millones de $)")
+
+```
+
+se puede ver los datos de cada caja y vemos como al modificar un dato disminuye el mite maximo pero aparece un dato atipico
+## Punto 2.
+
+### a)  media, mediana y moda.
+
+```{r}
+costos <- c(120, 230, 110, 115, 160, 130, 150, 105, 195, 155, 
+            105, 360, 120, 120, 140, 100, 115, 180, 235, 255)
+mean(costos)
+median(costos)
+mlv(costos)
+```
+
+### b) primer y tercer cuartiles.
+
+```{r}
+quantile(costos, 0.25)
+quantile(costos, 0.75)
+```
+
+### c) percentil 90
+
+```{r}
+quantile(costos, 0.90)
+```
+
+Este valor indica que el 90% de los costos de declaración de impuestos son menores o iguales 237
+
+## Punto 3.
+
+```{r}
+cuarto_milla <- c(0.92, 0.98, 1.04, 0.90, 0.99)
+milla <- c(4.52, 4.35, 4.60, 4.70, 4.50)
+sd(cuarto_milla)
+sd(milla)
+sd(cuarto_milla)/mean(cuarto_milla)
+sd(milla)/mean(milla)
+```
+
+El entrenador estuvo en lo correcto. Los corredores de cuarto de milla tienen un coeficiente de variación más bajo (0.058) en comparación con los corredores de milla (0.129), lo que indica que los tiempos de cuarto de milla son más consistentes.

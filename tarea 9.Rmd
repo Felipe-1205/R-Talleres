@@ -1,0 +1,59 @@
+---
+title: "tarea 9"
+author: "Andres Felipe Marroquin Martin"
+date: "`r Sys.Date()`"
+output: word_document
+---
+# Tarea 9
+
+## Punto 1.
+
+### Comparación del índice de costo de vida entre vivienda y comestibles
+
+```{r}
+A <- c(132, 109, 128, 122, 100, 96, 100, 131, 97, 120, 115, 98, 111, 93, 97, 111, 110, 92, 
+       85, 109, 123, 115, 107, 96, 108, 104, 128, 121, 85, 91, 115, 114, 86, 115, 90, 113)
+B <- c(125, 118, 139, 104, 103, 107, 109, 117, 105, 110, 109, 105, 109, 104, 102, 100, 106, 103, 
+       98, 102, 100, 95, 93, 98, 93, 90, 108, 102, 96, 92, 108, 117, 109, 107, 100, 95)
+t_test <- t.test(A, B, paired = TRUE, alternative = "greater")
+print(t_test)
+```
+
+El valor p (0.1147) indica que no hay evidencia suficiente para afirmar que el índice de costo de vida para vivienda es mayor que el de comestibles. Por lo tanto, no se rechaza la hipótesis nula.
+
+## Punto 2.
+
+### Diferencia en apoyo a un candidato entre dos distritos
+
+```{r}
+n_A <- 300  # Tamaño de la muestra del distrito A
+p_A <- 0.56 # Proporción a favor en el distrito A
+n_B <- 200  # Tamaño de la muestra del distrito B
+p_B <- 0.48 # Proporción a favor en el distrito B
+p_pool <- (n_A * p_A + n_B * p_B) / (n_A + n_B)
+z <- (p_A - p_B) / sqrt(p_pool * (1 - p_pool) * (1/n_A + 1/n_B))
+p_value <- 2 * (1 - pnorm(abs(z)))
+cat("Estadístico Z:", z, "\n")
+cat("Valor p:", p_value, "\n")
+if (p_value < 0.05) {
+  cat("Rechazamos la hipótesis nula: Hay una diferencia significativa entre los distritos.\n")
+} else {
+  cat("No rechazamos la hipótesis nula: No hay una diferencia significativa entre los distritos.\n")
+}
+```
+
+El valor p (0.0792) es mayor que 0.05, lo que significa que no hay diferencia significativa entre el apoyo al candidato en los distritos A y B. No se rechaza la hipótesis nula.
+
+## Punto 3.
+
+### Comparación de duración de películas entre dos empresas
+
+```{r}
+
+empresa_1 <- c(102, 86, 98, 109, 92)
+empresa_2 <- c(81, 165, 97, 134, 92, 87, 114)
+t_test_2 <- t.test(empresa_2, empresa_1, var.equal = TRUE, alternative = "greater")
+print(t_test_2)
+```
+
+El valor p (0.1962) indica que no se puede concluir que la duración promedio de las películas de la empresa 2 sea mayor que la de la empresa 1. No se rechaza la hipótesis nula.

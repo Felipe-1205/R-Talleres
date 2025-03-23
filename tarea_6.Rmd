@@ -1,0 +1,63 @@
+---
+title: "Tarea 6"
+author: "Andres Felipe Marroquin Martin"
+date: "`r Sys.Date()`"
+output: word_document
+---
+
+# Tarea 6
+
+## Punto 1.
+
+### a)probabilidad de que las respiraciones excedan 22.
+
+```{r}
+media <- 16
+desviacion_estandar <- 4
+p_excede_22 <- 1 - pnorm(22, mean = media, sd = desviacion_estandar)
+p_excede_22
+```
+
+## Punto 2.
+
+### a)Proporción de personas con CBF entre 60 y 80
+
+```{r}
+media_cbf <- 74
+desviacion_cbf <- 16
+p_entre_60_y_80 <- pnorm(80, mean = media_cbf, sd = desviacion_cbf) - pnorm(60, mean = media_cbf, sd = desviacion_cbf)
+p_entre_60_y_80
+```
+
+### b)Proporción de personas con CBF mayor a 100
+
+```{r}
+p_mayor_100 <- 1 - pnorm(100, mean = media_cbf, sd = desviacion_cbf)
+p_mayor_100
+```
+
+### c)Proporción de personas con CBF debajo de 40 (diagnóstico erróneo)
+
+```{r}
+p_menor_40 <- pnorm(40, mean = media_cbf, sd = desviacion_cbf)
+p_menor_40
+```
+
+## Punto 3.
+
+### a)Probabilidad de que en una prueba x sea inferior a 3500
+
+```{r}
+media_globulos <- 7500
+desviacion_globulos <- 1750
+p_inferior_3500 <- pnorm(3500, mean = media_globulos, sd = desviacion_globulos)
+p_inferior_3500
+```
+
+### b)Probabilidad usando el promedio de dos pruebas
+
+```{r}
+error_estandar_promedio <- desviacion_globulos / sqrt(2)
+p_promedio_inferior_3500 <- pnorm(3500, mean = media_globulos, sd = error_estandar_promedio)
+p_promedio_inferior_3500
+```
